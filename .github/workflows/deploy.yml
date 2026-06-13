@@ -23,12 +23,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Docker Images
+      # ✅ FIX: client path (IMPORTANT)
+      - name: Build and Push Client Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/mern-client:latest ./client
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/mern-server:latest ./server
-
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mern-client:latest ./client/ci-cd
           docker push ${{ secrets.DOCKER_USERNAME }}/mern-client:latest
+
+      # backend build
+      - name: Build and Push Server Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mern-server:latest ./server
           docker push ${{ secrets.DOCKER_USERNAME }}/mern-server:latest
 
       - name: Deploy to EC2 via SSH
