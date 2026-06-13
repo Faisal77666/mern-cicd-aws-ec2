@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div className="flex items-center justify-center h-screen">
-        <h1>CI/CD pipelines with github actions ec2</h1>
+        <h1>CI/CD pipelines with github actions ec2 updated</h1>
       </div>
           
           
